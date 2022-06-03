@@ -1,12 +1,38 @@
 package com.hackerrank.stocktrades.model;
 
+import com.hackerrank.stocktrades.validation.StockType;
+import org.hibernate.validator.constraints.Range;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+
+@Entity
 public class StockTrade {
+
+    @javax.persistence.Id
+    @Column(name = "id", nullable = false)
+    @GeneratedValue
     private Integer id;
+
+    @Column
+    @StockType
     private String type;
+
+    @Column
     private Integer userId;
+
+    @Column
     private String symbol;
+
+    @Column
+    @Range(min = 1, max = 100)
     private Integer shares;
+
+    @Column
     private Integer price;
+
+    @Column
     private Long timestamp;
 
     public StockTrade() {

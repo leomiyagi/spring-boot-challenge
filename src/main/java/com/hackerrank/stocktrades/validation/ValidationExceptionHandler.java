@@ -1,5 +1,6 @@
 package com.hackerrank.stocktrades.validation;
 
+import com.hackerrank.stocktrades.exception.StockTradeNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,5 +15,10 @@ public class ValidationExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<Object> handleAllException(Exception ex, WebRequest request) {
         return handleExceptionInternal(ex, "Exception occurred! " + ex, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(value = {StockTradeNotFoundException.class})
+    public ResponseEntity<Object> handleStockTradeNotFoundException(Exception ex, WebRequest request) {
+        return ResponseEntity.notFound().build();
     }
 }
